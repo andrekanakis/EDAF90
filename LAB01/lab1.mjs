@@ -21,8 +21,8 @@ for (const name in inventory) {
 }
 /**
  * Reflection question 2
- * for .. in kan hantera enumerables own och inherited men inte non-enumerables.
- * .ownKeys klarar enumerable och non-enumerable own men inte inherited. 
+ * for .. in besöker enumerables own och inherited men inte non-enumerables.
+ * .keys besöker enumerable own men inget annat.
  */
 
 console.log('\n--- Assignment 1 ---------------------------------------')
@@ -38,20 +38,20 @@ console.log(makeOptions(inventory, 'foundation'));
 
 console.log('\n--- Assignment 2 ---------------------------------------')
 class Salad {
-  static instanceCounter = 0;
+  static #instanceCounter = 0;
 
-  constructor(arg) { 
+  constructor(arg) {
     if (arg instanceof Salad) {
       this.ingredients = {...arg.ingredients};
     } else {
       this.ingredients = {};
     }
-    this.id = 'salad_' + Salad.instanceCounter++;
+    this.id = 'salad_' + Salad.#instanceCounter++;
     const uuid = uuidv4();
     this.uuid = uuid;
   }
 
-  add(name, properties) { 
+  add(name, properties) {
     this.ingredients[name] = {...properties, size: properties.size || 1};
     return this;
   }
@@ -66,7 +66,7 @@ class Salad {
     if (Array.isArray(data)) {
       return data.map(salad => {
         const arraySalad = new Salad();
-        arraySalad.ingredients = { ...salad.ingredients };
+        arraySalad.ingredients = salad.ingredients ;
         arraySalad.uuid = salad.uuid;
         return arraySalad;
       });
@@ -92,7 +92,7 @@ myCaesarSalad.remove('Gurka');
 console.log(JSON.stringify(myCaesarSalad) + '\n');
 
 console.log('\n--- Assignment 3 ---------------------------------------')
-Salad.prototype.getPrice = function() { 
+Salad.prototype.getPrice = function() {
   return Object.values(this.ingredients)
   .reduce((total, ingredient) => total + ingredient.price * ingredient.size, 0);
 }
@@ -186,7 +186,7 @@ console.log('Min gourmetsallad har uuid: ' + myGourmetSalad.uuid);
 /**
  * Reflection question 6
  * Ja med #,
- * i.e. 
+ * i.e.
  * #privateProperty
  * this.#privateProperty = 42 funkar inom sin egna class men inte utanför.
  */

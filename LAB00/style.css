@@ -1,0 +1,28 @@
+h1 {
+  text-align: center;
+  color: blue;
+}
+
+fieldset {
+  border-radius: 25px;
+  border-color: black;
+  color: black;
+}
+
+.submit-button {
+  background-color: white;
+  border-color: black;
+  border-radius: 25px;
+  float: right;
+  padding: 10px;
+  margin-top: 20px;
+  margin-right: 10px;
+  box-shadow: none;
+  -webkit-appearance: none;
+}
+
+body {
+  background-color: lightblue;
+  margin-left: 50px;
+  margin-right: 50px;
+}
