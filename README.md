@@ -1,4 +1,4 @@
-#Weatherapp with favorites
+# Weatherapp with favorites
 
 Made for the course [EDAF90](https://kurser.lth.se/lot/course/EDAF90) @ LTH
 
